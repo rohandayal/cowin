@@ -10,6 +10,10 @@ const districts = [
     {
         name: 'South Delhi',
         id: 149,
+    },
+    {
+        name: 'Gautam Buddha Nagar',
+        id: 650
     }
 ];
 
@@ -52,6 +56,7 @@ const sendResults = (availabilities) => {
             console.log(sessionString);
             mailString += (sessionString + "\n");
         };
+        console.log("");
         if(process.env.sendMail === "true") sendEmail({
             subject: `Cowin slot availability for 18+ for the next ${weeks} weeks`,
             text: mailString,
@@ -84,7 +89,7 @@ const processResults = (rawResults) => {
 const fetchDetails = async () => {
     const requestHeaders = {
         "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0",
-        "Authorization": "Bearer " + process.env.token,
+        // "Authorization": "Bearer " + process.env.token,
         "Origin": "https://selfregistration.cowin.gov.in",
         "Referer": "https://selfregistration.cowin.gov.in/",
         "TE": "Trailers",
