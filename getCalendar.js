@@ -88,12 +88,22 @@ const processResults = (rawResults) => {
 
 const fetchDetails = async () => {
     const requestHeaders = {
-        "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:88.0) Gecko/20100101 Firefox/88.0",
-        // "Authorization": "Bearer " + process.env.token,
-        "Origin": "https://selfregistration.cowin.gov.in",
-        "Referer": "https://selfregistration.cowin.gov.in/",
-        "TE": "Trailers",
-        "Connection": "keep-alive"
+        method: "GET",
+        headers: {
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+            "Host": "cdn-api.co-vin.in",
+            "Upgrade-Insecure-Requests": "1",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36",
+            // "Authorization": "Bearer " + process.env.token,
+            // "Origin": "https://selfregistration.cowin.gov.in",
+            // "Referer": "https://selfregistration.cowin.gov.in/",
+            // "TE": "Trailers",
+            "Connection": "keep-alive"
+        }
     }
 
     let results = [];
@@ -103,6 +113,7 @@ const fetchDetails = async () => {
         for(var i=0; i<weeks; i++) {
             console.log(`- Fetching details for ${district.name} for date ${thisDate.toDateString()}`);
             try {
+                console.log(getURL(district.id, thisDate));
                 const serverResults = await fetch(getURL(district.id, thisDate), requestHeaders);
                 console.log(`- Details received for ${district.name} for date ${thisDate.toDateString()}`);
                 const text = await serverResults.text();
