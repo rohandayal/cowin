@@ -41,7 +41,9 @@ const createTransporter = async () => {
 const sendEmail = async (emailOptions) => {
     let emailTransporter = await createTransporter();
     await emailTransporter.sendMail(emailOptions);
-    console.log(`- Status mail sent to ${process.env.recipients}`);
+    const thisTime = new Date();
+    const timeString = thisTime.toDateString() + ", " + thisTime.toTimeString(); 
+    console.log(`- Status mail sent to ${process.env.recipients} - last updated ${timeString}`);
 }
 
 module.exports = {

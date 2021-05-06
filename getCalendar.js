@@ -34,7 +34,9 @@ const getURL = (districtId, date = new Date()) => {
 
 const sendResults = (availabilities) => {
     if(availabilities.length === 0) {
-        console.log("- No slots found anywhere");
+        const thisTime = new Date();
+        const timeString = thisTime.toDateString() + ", " + thisTime.toTimeString(); 
+        console.log("- No slots found anywhere - last updated " + timeString);
     } else {
         let district = "";
         let center = "";
@@ -113,22 +115,22 @@ const fetchDetails = async () => {
         for(var i=0; i<weeks; i++) {
             console.log(`- Fetching details for ${district.name} for date ${thisDate.toDateString()}`);
             try {
-                console.log(getURL(district.id, thisDate));
                 const serverResults = await fetch(getURL(district.id, thisDate), requestHeaders);
                 console.log(`- Details received for ${district.name} for date ${thisDate.toDateString()}`);
                 const text = await serverResults.text();
                 const data = text && JSON.parse(text);
                 results.push({ data: data, date: thisDate });
-                // moving to next week
-                thisDate.setDate(thisDate.getDate() + 7);
-                //sleeping for 5 seconds to be nice to server
-                await new Promise(r => setTimeout(r, 5000));
             } catch(error) {
                 if(error instanceof SyntaxError) {
                     console.log(`- Unable to parse results for ${district.name} for date ${thisDate.toDateString()}`)
                 } else {
                     console.log(`- Unable to get results for ${district.name} for date ${thisDate.toDateString()}`);
                 }
+            } finally {
+                // moving to next week
+                thisDate.setDate(thisDate.getDate() + 7);
+                //sleeping for 5 seconds to be nice to server
+                await new Promise(r => setTimeout(r, 5000));
             }
         }
     }
