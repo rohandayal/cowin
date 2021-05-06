@@ -126,12 +126,10 @@ const fetchDetails = async () => {
                 } else {
                     console.log(`- Unable to get results for ${district.name} for date ${thisDate.toDateString()}`);
                 }
-            } finally {
-                // moving to next week
-                thisDate.setDate(thisDate.getDate() + 7);
-                //sleeping for 5 seconds to be nice to server
-                await new Promise(r => setTimeout(r, 5000));
             }
+            thisDate.setDate(thisDate.getDate() + 7);
+            //sleeping for 5 seconds to be nice to server
+            await new Promise(r => setTimeout(r, 5000));
         }
     }
     processResults(results);
