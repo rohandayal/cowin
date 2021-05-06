@@ -124,7 +124,11 @@ const fetchDetails = async () => {
                 //sleeping for 5 seconds to be nice to server
                 await new Promise(r => setTimeout(r, 5000));
             } catch(error) {
-                console.log(`- Unable to get results for ${district.name} for date ${thisDate.toDateString()}`)
+                if(error instanceof SyntaxError) {
+                    console.log(`- Unable to parse results for ${district.name} for date ${thisDate.toDateString()}`)
+                } else {
+                    console.log(`- Unable to get results for ${district.name} for date ${thisDate.toDateString()}`);
+                }
             }
         }
     }
