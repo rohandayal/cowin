@@ -12,6 +12,22 @@ const districts = [
         id: 149,
     },
     {
+        name: 'South East Delhi',
+        id: 144,
+    },
+    {
+        name: 'South West Delhi',
+        id: 150,
+    },
+    {
+        name: 'Central Delhi',
+        id: 141,
+    },
+    {
+        name: 'New Delhi',
+        id: 140,
+    },
+    {
         name: 'Gautam Buddha Nagar',
         id: 650
     }
