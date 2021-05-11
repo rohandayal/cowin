@@ -18,6 +18,7 @@ const createTransporter = async () => {
         oauth2Client.getAccessToken((err, token) => {
             if (err) {
                 reject("Failed to create access token :(");
+		console.log(err);
             }
             resolve(token);
         });

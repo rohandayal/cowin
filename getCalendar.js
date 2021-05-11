@@ -88,7 +88,7 @@ const processResults = (rawResults) => {
     const availabilities = [];
     for(var i=0; i<rawResults.length; i++) {
         const results = rawResults[i].data;
-        if (!('centers' in results) || results.centers.length === 0) console.log(`  - No centers found for ${district.name} in week starting ${thisDate.toDateString()}`);
+        if (!('centers' in results) || results.centers.length === 0) continue; //console.log(`  - No centers found for ${district.name} in week starting ${thisDate.toDateString()}`);
         for (var centerCounter = 0; centerCounter < results.centers.length; centerCounter++) {
             const thisCenter = results.centers[centerCounter];
             if (!('sessions' in thisCenter) || thisCenter.sessions.length === 0) continue;
