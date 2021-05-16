@@ -105,7 +105,7 @@ const processResults = (rawResults) => {
             if (!('sessions' in thisCenter) || thisCenter.sessions.length === 0) continue;
             for (var sessionCounter = 0; sessionCounter < thisCenter.sessions.length; sessionCounter++) {
                 const thisSession = thisCenter.sessions[sessionCounter];
-                if (thisSession.min_age_limit < ageLimit && thisSession.available_capacity > 0) {
+                if (thisSession.min_age_limit < ageLimit && (thisSession.available_capacity_dose1 > 0 || thisSession.available_capacity_dose2 > 0)) {
                     availabilities.push({ center: thisCenter, session: thisSession});
                 }
             }
