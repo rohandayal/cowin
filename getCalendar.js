@@ -8,6 +8,10 @@ const districts = [
         id: 188,
     },
     {
+        name: 'Rohtak',
+        id: 192,
+    },
+    {
         name: 'South Delhi',
         id: 149,
     },
