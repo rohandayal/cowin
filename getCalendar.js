@@ -70,7 +70,14 @@ const sendResults = (availabilities) => {
                 console.log(centerString);
                 mailString += (centerString + "\n");
             }
-            const sessionString = `\t\t➔ ${availability.session.available_capacity} slots available on ${availability.session.date} for ${availability.session.vaccine ? availability.session.vaccine : 'Unspecified vaccine'}`;
+            let sessionString = "";
+            if(availability.session.available_capacity_dose1 > 0) {
+                sessionString += `\t\t➔ ${availability.session.available_capacity_dose1} 1st dose slots available on ${availability.session.date} for ${availability.session.vaccine ? availability.session.vaccine : 'Unspecified vaccine'}`;
+            }
+            if(availability.session.available_capacity_dose2 > 0) {
+                if(sessionString !== "") sessionString += "\n";
+                sessionString += `\t\t➔ ${availability.session.available_capacity_dose2} 2nd dose slots available on ${availability.session.date} for ${availability.session.vaccine ? availability.session.vaccine : 'Unspecified vaccine'}`;
+            }
             console.log(sessionString);
             mailString += (sessionString + "\n");
         };
